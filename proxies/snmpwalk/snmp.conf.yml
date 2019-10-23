@@ -1,0 +1,53 @@
+#   LOG LEVELS
+# 1 - CriticalLevel
+# 2 - ErrorLevel
+# 3 - WarningLevel
+# 4 - NoticeLevel
+# 5 - DebugLevel
+# 6 - InfoLevel
+#
+# Request log from http server writing with Notice level
+# Snmp request error writed in Warning log
+#
+#
+#  HANDLER BLOCK
+# Prefix formate request address
+#
+
+handler:
+  prefix: /api/
+  listen: 0.0.0.0:3332
+
+#Caching results from store
+cache:
+  defaults:
+    purge_sec: 10
+  #Кеширование ответов с оборудования в секундах
+  remote_expiration_sec: 1800
+
+
+system:
+  #Ограничение на максимальное количество одновременных запросов на один хост
+  max_async_workers_to_host: 3
+  #Ограничение на максимальное количество одновременных snmp запросов   по одному http запросу
+  max_async_workers_for_request: 5
+  #Количество опросников
+  count_workers: 100
+  #Количество обработчиков ответов с опросников
+  response_collector_count: 1
+  #Сброс опроса при таймайте свыше
+  request_reset_timeout_sec: 30
+  #Ограничение на максимальное количество запросов(свитч-оид) в одном запросе
+  max_count_in_one_request: 10000
+
+snmp:
+  #Таймаут на опрос по SNMP
+  timeout: 3
+  #Количество повторных запросов при ошибке 1 + repeats
+  repeats: 1
+
+logger:
+  console:
+    enabled: true
+    enable_color: true
+    log_level: 6
