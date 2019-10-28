@@ -3,6 +3,7 @@ version: '3.5'
 services:
   telnet-proxy:
     build: ./telnet
+    restart: always
     container_name: telnet-proxy
     ports:
       - "3333:3333"
@@ -14,6 +15,7 @@ services:
   snmp-proxy:
     build: ./snmpwalk
     container_name: snmp-proxy
+    restart: always
     ports:
       - "3332:3332"
     logging:
